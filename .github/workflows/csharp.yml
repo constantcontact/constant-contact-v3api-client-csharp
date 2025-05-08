@@ -1,0 +1,37 @@
+name: CSharp Release to NuGet
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build_and_release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build project
+        run: dotnet build -c Release
+      - name: Create tag from commit
+        uses: christophebedard/tag-version-commit@v1
+        id: tag_version
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version_regex: '([0-9]+\.[0-9]+\.[0-9]+)'
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.tag }}
+          name: Release ${{ steps.tag_version.outputs.tag }}
+      - name: Pack NuGet package
+        run: dotnet pack -c Release -o ./nupkgs /p:Version=${{ steps.tag_version.outputs.tag }}
+      - name: Publish to NuGet
+        run: dotnet nuget push ./nupkgs/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
