@@ -5,6 +5,7 @@ CHANGELOG.md
 ConstantContactApi.sln
 LICENSE
 README.md
+README.md
 api/openapi.yaml
 appveyor.yml
 docs/AccountServicesApi.md
@@ -162,6 +163,8 @@ src/ConstantContactApi/Model/CreateOrUpdateContact200Response.cs
 src/ConstantContactApi/Model/CreateOrUpdateContactCustomField.cs
 src/ConstantContactApi/Model/CreateOrUpdateContactRequest.cs
 src/ConstantContactApi/Model/CreateOrUpdateContactRequestCustomFieldsInner.cs
+src/ConstantContactApi/Model/CreateOrUpdateContactRequestSmsChannel.cs
+src/ConstantContactApi/Model/CreateOrUpdateContactRequestSmsChannelSmsChannelConsentsInner.cs
 src/ConstantContactApi/Model/CreateOrUpdateContactRequestStreetAddress.cs
 src/ConstantContactApi/Model/CreateResendEmailCampaign201Response.cs
 src/ConstantContactApi/Model/CreateResendEmailCampaignRequest.cs
@@ -332,7 +335,6 @@ src/ConstantContactApi/Model/HeadersObject.cs
 src/ConstantContactApi/Model/HistoryDetails.cs
 src/ConstantContactApi/Model/JmmlSmsChannel.cs
 src/ConstantContactApi/Model/JmmlSmsChannelConsents.cs
-src/ConstantContactApi/Model/JmmlSmsChannelSmsChannelConsentsInner.cs
 src/ConstantContactApi/Model/JsonImportContact.cs
 src/ConstantContactApi/Model/Link.cs
 src/ConstantContactApi/Model/Links.cs

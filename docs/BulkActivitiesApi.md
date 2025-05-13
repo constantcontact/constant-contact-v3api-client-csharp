@@ -21,7 +21,7 @@ All URIs are relative to *https://api.cc.email/v3*
 
 <a id="createcsvimportactivity"></a>
 # **CreateCSVImportActivity**
-> CreateCSVImportActivity201Response CreateCSVImportActivity (System.IO.Stream file, List<string> listIds, string? smsPermissionToSend = null)
+> CreateCSVImportActivity201Response CreateCSVImportActivity (System.IO.Stream file, string listIds, string? smsPermissionToSend = null)
 
 Import Contacts using a CSV File
 
@@ -50,7 +50,7 @@ namespace Example
 
             var apiInstance = new BulkActivitiesApi(config);
             var file = new System.IO.MemoryStream(System.IO.File.ReadAllBytes("/path/to/file.txt"));  // System.IO.Stream | The CSV file you are importing  must include either `email` or `sms_number` as a column heading. Other properties you can include using column headings are: `first_name`.  `last_name`, `phone`, `job_title`, `anniversary`, `birthday_day`, `birthday_month`, `company_name`, `street`, `street2`, `city`, `state`, `zip`, `country`, and `sms_consent_date`.   If adding an `sms_number`, you must also include the `sms_permission_to_send` parameter and set it to either `not_set` or `explicit`. If `explicit`, requires including `sms_consent_date` as a column header to specify the date the contact consented to receiving SMS messages.   You can also use custom fields as column headings. Enter the custom field name prefixed with `cf:` as the column heading. For example, use `cf:first_name` as the header name if you have a custom field named \\\"first_name\\\". The custom field must already exist in the Constant Contact account you are using. Depending on the custom field data type, you can enter dates or strings as the value of the custom field. Each contact can contain up to 25 different custom fields.
-            var listIds = new List<string>(); // List<string> | Specify which contact lists you are adding all imported contacts to as an array of up to 50 contact `list_id` values.
+            var listIds = "listIds_example";  // string | Specify which contact lists you are adding all imported contacts to as an array of up to 50 contact `list_id` values.
             var smsPermissionToSend = "not_set";  // string? | If importing contact `sms_number`s, use this parameter to specify how SMS consent was provided. If all contacts in the file provided their consent, set to `explicit` and include each contact's `sms_consent_date`. If all contacts in the file have not yet provided consent, set to `not_set` (`sms_consent_date` is not required). You cannot message a contact that does not have a sms consent date set. (optional) 
 
             try
@@ -95,7 +95,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **file** | **System.IO.Stream****System.IO.Stream** | The CSV file you are importing  must include either &#x60;email&#x60; or &#x60;sms_number&#x60; as a column heading. Other properties you can include using column headings are: &#x60;first_name&#x60;.  &#x60;last_name&#x60;, &#x60;phone&#x60;, &#x60;job_title&#x60;, &#x60;anniversary&#x60;, &#x60;birthday_day&#x60;, &#x60;birthday_month&#x60;, &#x60;company_name&#x60;, &#x60;street&#x60;, &#x60;street2&#x60;, &#x60;city&#x60;, &#x60;state&#x60;, &#x60;zip&#x60;, &#x60;country&#x60;, and &#x60;sms_consent_date&#x60;.   If adding an &#x60;sms_number&#x60;, you must also include the &#x60;sms_permission_to_send&#x60; parameter and set it to either &#x60;not_set&#x60; or &#x60;explicit&#x60;. If &#x60;explicit&#x60;, requires including &#x60;sms_consent_date&#x60; as a column header to specify the date the contact consented to receiving SMS messages.   You can also use custom fields as column headings. Enter the custom field name prefixed with &#x60;cf:&#x60; as the column heading. For example, use &#x60;cf:first_name&#x60; as the header name if you have a custom field named \\\&quot;first_name\\\&quot;. The custom field must already exist in the Constant Contact account you are using. Depending on the custom field data type, you can enter dates or strings as the value of the custom field. Each contact can contain up to 25 different custom fields. |  |
-| **listIds** | [**List&lt;string&gt;**](string.md) | Specify which contact lists you are adding all imported contacts to as an array of up to 50 contact &#x60;list_id&#x60; values. |  |
+| **listIds** | **string** | Specify which contact lists you are adding all imported contacts to as an array of up to 50 contact &#x60;list_id&#x60; values. |  |
 | **smsPermissionToSend** | **string?** | If importing contact &#x60;sms_number&#x60;s, use this parameter to specify how SMS consent was provided. If all contacts in the file provided their consent, set to &#x60;explicit&#x60; and include each contact&#39;s &#x60;sms_consent_date&#x60;. If all contacts in the file have not yet provided consent, set to &#x60;not_set&#x60; (&#x60;sms_consent_date&#x60; is not required). You cannot message a contact that does not have a sms consent date set. | [optional]  |
 
 ### Return type

@@ -3,11 +3,11 @@ info:
   contact:
     email: webservices@constantcontact.com
     name: Constant Contact Public API
-  description: Swagger build version 3.0.53
+  description: Swagger build version 3.0.62
   license:
     name: Private
   title: Constant Contact API v3
-  version: 1.0.171
+  version: 1.0.185
 servers:
 - url: https://api.cc.email/v3
 tags:
@@ -58,6 +58,8 @@ tags:
 - description: Use partner webhooks to subscribe to billing event notifications from
     Constant Contact.
   name: Technology Partners Webhooks
+- description: Endpoints and methods used for integrations.
+  name: Integrations
 paths:
   /account/user/privileges:
     get:
@@ -2066,7 +2068,7 @@ paths:
         \nUpdates to existing contacts are partial updates. This method only updates\
         \ the contact properties you include in the request body. Updates append new\
         \ contact lists or custom fields to the existing `list_memberships` or `custom_fields`\
-        \ arrays.\nIf `email_address` is specified: <div class=\"Msg\"><p class=\"\
+        \ arrays.\n\nIf `email_address` is specified: <div class=\"Msg\"><p class=\"\
         note-text\">Only use this method when a contact gives you their explicit permission\
         \ to send them an email. It is a violation of anti-spam and telemarketing\
         \ laws, as well as a serious violation of the Constant Contact Terms of Service\
@@ -2077,7 +2079,7 @@ paths:
         \ of anti-spam and telemarketing laws, as well as a serious violation of the\
         \ Constant Contact Terms of Service to use the Opt-in features of the API\
         \ to opt a contact back in without his or her own action and consent.</p></div>\n\
-        When this method creates a new contact, it returns a 201 response code.When\
+        \nWhen this method creates a new contact, it returns a 201 response code.When\
         \ this method updates an existing contact, it returns a 200 response code.\
         \ Updating a deleted contact restores the contact.\n\nThe method automatically\
         \ modifies the contact's `permission_to_send` and `opt_in_source` properties\
@@ -8198,6 +8200,7 @@ components:
       - sms_consent_permission
       type: object
     JmmlSmsChannel:
+      description: The contact's SMS details.
       properties:
         sms_address:
           description: "The contact's SMS-capable phone number, excluding the country\
@@ -8216,7 +8219,7 @@ components:
         sms_channel_consents:
           description: The consents provided for the SMS Channel.
           items:
-            $ref: '#/components/schemas/JmmlSmsChannel_sms_channel_consents_inner'
+            $ref: '#/components/schemas/createOrUpdateContact_request_sms_channel_sms_channel_consents_inner'
           type: array
       required:
       - country_code
@@ -8297,8 +8300,7 @@ components:
         street_address:
           $ref: '#/components/schemas/createOrUpdateContact_request_street_address'
         sms_channel:
-          description: The contact's SMS compatible phone number.
-          type: string
+          $ref: '#/components/schemas/createOrUpdateContact_request_sms_channel'
       required:
       - list_memberships
       type: object
@@ -12969,10 +12971,9 @@ components:
           description: Specify which contact lists you are adding all imported contacts
             to as an array of up to 50 contact `list_id` values.
           example: 8c077f20-1586-11e4-bcb3-00163e56be7c
-          items:
-            type: string
+          format: csv
           maxItems: 50
-          type: array
+          type: string
         sms_permission_to_send:
           description: "If importing contact `sms_number`s, use this parameter to\
             \ specify how SMS consent was provided. If all contacts in the file provided\
@@ -15607,6 +15608,76 @@ components:
       required:
       - kind
       type: object
+    createOrUpdateContact_request_sms_channel_sms_channel_consents_inner:
+      properties:
+        sms_consent_permission:
+          description: The current consent status of the SMS Channel.
+          example: pending_confirmation
+          type: string
+        consent_type:
+          description: The type of consent provided.
+          example: promotional_sms
+          type: string
+        consent_medium_type:
+          description: A code representing where the consent was retrieved.
+          example: LF
+          type: string
+        consent_medium_url:
+          description: "The URL for which the consent was gathered, such as a landing\
+            \ page."
+          example: https://lp.constantcontactpages.com/su/iPtuMuh
+          type: string
+        consent_medium_details:
+          description: Additional information for the consent
+          example: Contact used our landing page to consent to SMS.
+          type: string
+        advertised_frequency:
+          description: "The numeric component used to indicate how often to send advertising.\
+            \ For example, <code>1</code> indicates once. Use with <code>advertised_internal</code>\
+            \ property to indicate when on the calender to send it. For example, to\
+            \ send once (<code>1</code>) daily, weekly, or monthly."
+          example: 1
+          type: integer
+        advertised_interval:
+          description: The calender interval used to indicate when advertising is
+            sent. For example <code>weekly</code>.
+          example: weekly
+          type: string
+      required:
+      - consent_medium_details
+      - consent_medium_type
+      - consent_medium_url
+      - consent_type
+      - sms_consent_permission
+      type: object
+    createOrUpdateContact_request_sms_channel:
+      description: The contact's SMS details.
+      properties:
+        sms_address:
+          description: "The contact's SMS-capable phone number, excluding the country\
+            \ code."
+          example: "7815551212"
+          type: string
+        dial_code:
+          description: "The dial code the country uses. For example, use <code>1</code>\
+            \ for the United States dial code."
+          example: "1"
+          type: string
+        country_code:
+          description: The two-digit code that identifies the country.
+          example: US
+          type: string
+        sms_channel_consents:
+          description: The consents provided for the SMS Channel.
+          items:
+            $ref: '#/components/schemas/createOrUpdateContact_request_sms_channel_sms_channel_consents_inner'
+          type: array
+      required:
+      - country_code
+      - dial_code
+      - sms_address
+      - sms_channel_consents
+      type: object
     createOrUpdateContact_request:
       properties:
         email_address:
@@ -15680,8 +15751,7 @@ components:
         street_address:
           $ref: '#/components/schemas/createOrUpdateContact_request_street_address'
         sms_channel:
-          description: The contact's SMS compatible phone number.
-          type: string
+          $ref: '#/components/schemas/createOrUpdateContact_request_sms_channel'
       required:
       - list_memberships
       type: object
@@ -20341,48 +20411,6 @@ components:
           description: Description of the error.
           example: include_membership_count does not have a valid value
           type: string
-      type: object
-    JmmlSmsChannel_sms_channel_consents_inner:
-      properties:
-        sms_consent_permission:
-          description: The current consent status of the SMS Channel.
-          example: pending_confirmation
-          type: string
-        consent_type:
-          description: The type of consent provided.
-          example: promotional_sms
-          type: string
-        consent_medium_type:
-          description: A code representing where the consent was retrieved.
-          example: LF
-          type: string
-        consent_medium_url:
-          description: "The URL for which the consent was gathered, such as a landing\
-            \ page."
-          example: https://lp.constantcontactpages.com/su/iPtuMuh
-          type: string
-        consent_medium_details:
-          description: Additional information for the consent
-          example: Contact used our landing page to consent to SMS.
-          type: string
-        advertised_frequency:
-          description: "The numeric component used to indicate how often to send advertising.\
-            \ For example, <code>1</code> indicates once. Use with <code>advertised_internal</code>\
-            \ property to indicate when on the calender to send it. For example, to\
-            \ send once (<code>1</code>) daily, weekly, or monthly."
-          example: 1
-          type: integer
-        advertised_interval:
-          description: The calender interval used to indicate when advertising is
-            sent. For example <code>weekly</code>.
-          example: weekly
-          type: string
-      required:
-      - consent_medium_details
-      - consent_medium_type
-      - consent_medium_url
-      - consent_type
-      - sms_consent_permission
       type: object
     PaginationLinks_next:
       description: "Contains the next page link, if applicable."
