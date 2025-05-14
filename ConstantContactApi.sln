@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstantContactApi", "src\ConstantContactApi\ConstantContactApi.csproj", "{A5305D00-358C-4EDB-84F9-7C0C7FFD2488}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstantContactApi", "src\ConstantContactApi\ConstantContactApi.csproj", "{7D7C0C7A-8EF2-4351-B0D1-29842B6688BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,10 +10,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A5305D00-358C-4EDB-84F9-7C0C7FFD2488}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5305D00-358C-4EDB-84F9-7C0C7FFD2488}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5305D00-358C-4EDB-84F9-7C0C7FFD2488}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5305D00-358C-4EDB-84F9-7C0C7FFD2488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D7C0C7A-8EF2-4351-B0D1-29842B6688BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D7C0C7A-8EF2-4351-B0D1-29842B6688BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D7C0C7A-8EF2-4351-B0D1-29842B6688BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D7C0C7A-8EF2-4351-B0D1-29842B6688BB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU

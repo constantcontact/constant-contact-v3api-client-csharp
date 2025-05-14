@@ -7,7 +7,7 @@ info:
   license:
     name: Private
   title: Constant Contact API v3
-  version: 1.0.185
+  version: 1.0.193
 servers:
 - url: https://api.cc.email/v3
 tags:
