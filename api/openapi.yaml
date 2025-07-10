@@ -3,11 +3,11 @@ info:
   contact:
     email: webservices@constantcontact.com
     name: Constant Contact Public API
-  description: Swagger build version 3.0.62
+  description: Swagger build version 3.0.65
   license:
     name: Private
   title: Constant Contact API v3
-  version: 1.0.193
+  version: 1.0.195
 servers:
 - url: https://api.cc.email/v3
 tags:
@@ -58,8 +58,6 @@ tags:
 - description: Use partner webhooks to subscribe to billing event notifications from
     Constant Contact.
   name: Technology Partners Webhooks
-- description: Endpoints and methods used for integrations.
-  name: Integrations
 paths:
   /account/user/privileges:
     get:
