@@ -8,15 +8,15 @@ All URIs are relative to *https://api.cc.email/v3*
 | [**DeleteCustomField**](ContactsCustomFieldsApi.md#deletecustomfield) | **DELETE** /contact_custom_fields/{custom_field_id} | DELETE a custom_field |
 | [**GetAllCustomFields**](ContactsCustomFieldsApi.md#getallcustomfields) | **GET** /contact_custom_fields | GET custom_fields Collection |
 | [**GetCustomField**](ContactsCustomFieldsApi.md#getcustomfield) | **GET** /contact_custom_fields/{custom_field_id} | GET a custom_field |
-| [**UpdateCustomField**](ContactsCustomFieldsApi.md#updatecustomfield) | **PUT** /contact_custom_fields/{custom_field_id} | PUT (update) a custom_field |
+| [**UpdateCustomField**](ContactsCustomFieldsApi.md#updatecustomfield) | **PUT** /contact_custom_fields/{custom_field_id} | Update a custom field. |
 
 <a id="createcustomfields"></a>
 # **CreateCustomFields**
-> GetCustomField200Response CreateCustomFields (UpdateCustomFieldRequest updateCustomFieldRequest)
+> GetCustomField200Response CreateCustomFields (CreateCustomFieldsRequest createCustomFieldsRequest)
 
 POST (create) a custom_field
 
-This POST request adds a new `custom_field` to the user's account. A user can configure up to 100 `custom_fields` in their account.
+Custom fields are extra data fields you create to store additional information about your contacts, such as preferences, membership levels, and interests. Use custom fields to organize contacts, send personalized email campaigns, and to identify a targeted audience for a specific campaign. Custom fields types include text, number, date, drop-down lists, radio buttons, and checkboxes. A user can configure up to 100 `custom_fields` in their account.
 
 ### Example
 ```csharp
@@ -40,12 +40,12 @@ namespace Example
             config.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ContactsCustomFieldsApi(config);
-            var updateCustomFieldRequest = new UpdateCustomFieldRequest(); // UpdateCustomFieldRequest | The JSON payload required to create a new `custom_field`
+            var createCustomFieldsRequest = new CreateCustomFieldsRequest(); // CreateCustomFieldsRequest | The JSON payload required to create a new custom field.
 
             try
             {
                 // POST (create) a custom_field
-                GetCustomField200Response result = apiInstance.CreateCustomFields(updateCustomFieldRequest);
+                GetCustomField200Response result = apiInstance.CreateCustomFields(createCustomFieldsRequest);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -66,7 +66,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // POST (create) a custom_field
-    ApiResponse<GetCustomField200Response> response = apiInstance.CreateCustomFieldsWithHttpInfo(updateCustomFieldRequest);
+    ApiResponse<GetCustomField200Response> response = apiInstance.CreateCustomFieldsWithHttpInfo(createCustomFieldsRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -83,7 +83,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **updateCustomFieldRequest** | [**UpdateCustomFieldRequest**](UpdateCustomFieldRequest.md) | The JSON payload required to create a new &#x60;custom_field&#x60; |  |
+| **createCustomFieldsRequest** | [**CreateCustomFieldsRequest**](CreateCustomFieldsRequest.md) | The JSON payload required to create a new custom field. |  |
 
 ### Return type
 
@@ -102,7 +102,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | New custom_field successfully created |  -  |
+| **201** | New custom field successfully created |  -  |
 | **400** | Bad request. Either the JSON was malformed or there was a data validation error. |  -  |
 | **401** | The Access Token used is invalid. |  -  |
 | **403** | Forbidden request. You lack the necessary scopes, you lack the necessary user privileges, or the application is deactivated. |  -  |
@@ -119,7 +119,7 @@ catch (ApiException e)
 
 DELETE a custom_field
 
-This DELETE request deletes a custom_field from the user's account
+Delete a custom field from the user's account.
 
 ### Example
 ```csharp
@@ -143,7 +143,7 @@ namespace Example
             config.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ContactsCustomFieldsApi(config);
-            var customFieldId = 04fe9a-a579-43c5-bb1a-58ed29bf0a6a;  // string | Unique ID of the custom_field on which to operate.
+            var customFieldId = 04fe9a-a579-43c5-bb1a-58ed29bf0a6a;  // string | The ID that uniquely identifies the custom field to delete.
 
             try
             {
@@ -182,7 +182,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **customFieldId** | **string** | Unique ID of the custom_field on which to operate. |  |
+| **customFieldId** | **string** | The ID that uniquely identifies the custom field to delete. |  |
 
 ### Return type
 
@@ -217,7 +217,7 @@ void (empty response body)
 
 GET custom_fields Collection
 
-This GET request returns all `custom_fields` defined in the user's account. <div class=\"Msg\"><p class=\"note-text\">This method does not currently support filtering results using the custom field update date.</p></div>
+Get all custom fields defined in the user's account. <div class=\"Msg\"><p class=\"note-text\">This method does not currently support filtering results using the custom field update date.</p></div>
 
 ### Example
 ```csharp
@@ -318,7 +318,7 @@ catch (ApiException e)
 
 GET a custom_field
 
-This GET call retrieves a `custom_field` resource, specified by `custom_field_id`.
+Get details for a specified custom field.
 
 ### Example
 ```csharp
@@ -342,7 +342,7 @@ namespace Example
             config.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ContactsCustomFieldsApi(config);
-            var customFieldId = 04fe9a-a579-43c5-bb1a-58ed29bf0a6a;  // string | Unique ID of the `custom_field` on which to operate.
+            var customFieldId = 04fe9a-a579-43c5-bb1a-58ed29bf0a6a;  // string | The ID that uniquely identifies the custom field.
 
             try
             {
@@ -385,7 +385,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **customFieldId** | **string** | Unique ID of the &#x60;custom_field&#x60; on which to operate. |  |
+| **customFieldId** | **string** | The ID that uniquely identifies the custom field. |  |
 
 ### Return type
 
@@ -418,9 +418,9 @@ catch (ApiException e)
 # **UpdateCustomField**
 > GetCustomField200Response UpdateCustomField (string customFieldId, UpdateCustomFieldRequest updateCustomFieldRequest)
 
-PUT (update) a custom_field
+Update a custom field.
 
-This PUT request updates an existing `custom_field` object.
+Update an existing custom field.
 
 ### Example
 ```csharp
@@ -444,12 +444,12 @@ namespace Example
             config.AccessToken = "YOUR_ACCESS_TOKEN";
 
             var apiInstance = new ContactsCustomFieldsApi(config);
-            var customFieldId = 04fe9a-a579-43c5-bb1a-58ed29bf0a6a;  // string | Unique ID of the `custom_field` on which to operate.
+            var customFieldId = 04fe9a-a579-43c5-bb1a-58ed29bf0a6a;  // string | The ID that uniquely identifies the custom field to update.
             var updateCustomFieldRequest = new UpdateCustomFieldRequest(); // UpdateCustomFieldRequest | The JSON payload used to update an existing custom field. Any properties omitted in the PUT request are overwritten with a null value.
 
             try
             {
-                // PUT (update) a custom_field
+                // Update a custom field.
                 GetCustomField200Response result = apiInstance.UpdateCustomField(customFieldId, updateCustomFieldRequest);
                 Debug.WriteLine(result);
             }
@@ -470,7 +470,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // PUT (update) a custom_field
+    // Update a custom field.
     ApiResponse<GetCustomField200Response> response = apiInstance.UpdateCustomFieldWithHttpInfo(customFieldId, updateCustomFieldRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -488,7 +488,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **customFieldId** | **string** | Unique ID of the &#x60;custom_field&#x60; on which to operate. |  |
+| **customFieldId** | **string** | The ID that uniquely identifies the custom field to update. |  |
 | **updateCustomFieldRequest** | [**UpdateCustomFieldRequest**](UpdateCustomFieldRequest.md) | The JSON payload used to update an existing custom field. Any properties omitted in the PUT request are overwritten with a null value. |  |
 
 ### Return type

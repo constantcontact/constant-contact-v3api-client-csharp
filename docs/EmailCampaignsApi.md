@@ -22,7 +22,7 @@ All URIs are relative to *https://api.cc.email/v3*
 
 POST (Create) a New Email Campaign
 
-Use this method to create a new email campaign. This method also creates new `primary_email` and `permalink` email campaign activities and associates them with the new email campaign.  The request body must contain the `name` property and the `email_campaign_activities` array. The `name` must be unique. The `email_campaign_activities` array contains the main content of your email campaign and must include `format_type`, `from_name`, `from_email`, `reply_to_email`, `subject`, and `html_content` properties. The `from_email` address you use must use a verified email address for your account. NOTE: If you create an email campaign using a legacy (V7) format, Constant Contact automatically converts it to the newer custom code format. 
+Use this method to create a new email campaign. You must include a tracking image (`[[trackingImage]]`) in the email body in order for Constant Contact to report on the email performance. This method also creates new `primary_email` and `permalink` email campaign activities and associates them with the new email campaign. The request body must contain the `name` property and the `email_campaign_activities` array. The `name` must be unique. The `email_campaign_activities` array contains the main content of your email campaign and must include `format_type`, `from_name`, `from_email`, `reply_to_email`, `subject`, and `html_content` properties. The `from_email` address you use must use a verified email address for your account. NOTE: If you create an email campaign using a legacy (V7) format, Constant Contact automatically converts it to the newer custom code format. 
 
 ### Example
 ```csharp

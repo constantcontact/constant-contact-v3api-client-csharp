@@ -217,7 +217,7 @@ catch (ApiException e)
 
 <a id="getalllists"></a>
 # **GetAllLists**
-> GetAllLists200Response GetAllLists (int? limit = null, bool? includeCount = null, string? includeMembershipCount = null, string? name = null, string? status = null)
+> GetAllLists200Response GetAllLists (int? limit = null, bool? includeCount = null, string? includeMembershipCount = null, string? name = null, string? status = null, string? channelType = null, bool? includeSmsMembershipCount = null)
 
 GET Lists Collection
 
@@ -250,11 +250,13 @@ namespace Example
             var includeMembershipCount = all;  // string? | Use to include the total number of contacts per list. Set to  `active`, to count only active (mailable) contacts, or `all` to count all contacts. (optional) 
             var name = TopTier;  // string? | Use to get details for a single list by entering the full name of the list. (optional) 
             var status = all;  // string? | Use to get lists by status. Accepts comma-separated status values. (optional) 
+            var channelType = all;  // string? | Use to return lists by channel type. The default value is `email`. (optional) 
+            var includeSmsMembershipCount = false;  // bool? | Set to `true` to return the total number of SMS members in each list. Only applicable when `channel_type` is `sms`. Default is `false`. (optional) 
 
             try
             {
                 // GET Lists Collection
-                GetAllLists200Response result = apiInstance.GetAllLists(limit, includeCount, includeMembershipCount, name, status);
+                GetAllLists200Response result = apiInstance.GetAllLists(limit, includeCount, includeMembershipCount, name, status, channelType, includeSmsMembershipCount);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -275,7 +277,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // GET Lists Collection
-    ApiResponse<GetAllLists200Response> response = apiInstance.GetAllListsWithHttpInfo(limit, includeCount, includeMembershipCount, name, status);
+    ApiResponse<GetAllLists200Response> response = apiInstance.GetAllListsWithHttpInfo(limit, includeCount, includeMembershipCount, name, status, channelType, includeSmsMembershipCount);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -297,6 +299,8 @@ catch (ApiException e)
 | **includeMembershipCount** | **string?** | Use to include the total number of contacts per list. Set to  &#x60;active&#x60;, to count only active (mailable) contacts, or &#x60;all&#x60; to count all contacts. | [optional]  |
 | **name** | **string?** | Use to get details for a single list by entering the full name of the list. | [optional]  |
 | **status** | **string?** | Use to get lists by status. Accepts comma-separated status values. | [optional]  |
+| **channelType** | **string?** | Use to return lists by channel type. The default value is &#x60;email&#x60;. | [optional]  |
+| **includeSmsMembershipCount** | **bool?** | Set to &#x60;true&#x60; to return the total number of SMS members in each list. Only applicable when &#x60;channel_type&#x60; is &#x60;sms&#x60;. Default is &#x60;false&#x60;. | [optional]  |
 
 ### Return type
 
